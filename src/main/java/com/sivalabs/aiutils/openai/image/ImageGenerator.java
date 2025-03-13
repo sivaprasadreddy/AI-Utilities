@@ -5,18 +5,14 @@ import org.springframework.ai.image.ImageModel;
 import org.springframework.ai.image.ImageOptionsBuilder;
 import org.springframework.ai.image.ImagePrompt;
 import org.springframework.ai.image.ImageResponse;
-import org.springframework.ai.openai.OpenAiImageModel;
-import org.springframework.ai.openai.api.OpenAiImageApi;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ImageGenerator {
     private final ImageModel imageModel;
 
-    public ImageGenerator(String apiKey) {
-        OpenAiImageApi openAiImageApi =
-                OpenAiImageApi.builder()
-                        .apiKey(apiKey)
-                        .build();
-        this.imageModel = new OpenAiImageModel(openAiImageApi);
+    public ImageGenerator(ImageModel imageModel) {
+        this.imageModel = imageModel;
     }
 
     public String generate(String prompt) {
